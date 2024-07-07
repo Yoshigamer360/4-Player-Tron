@@ -61,3 +61,33 @@ pygame.display.set_caption("Tron by Yoshi_Gamer_360")
 font = pygame.font.SysFont("Centaur", 72)
 clock = pygame.time.Clock()
 checkTime = time.time()
+
+# Define players and paths of players
+objects = list()
+path = list()
+p1, p2, p3, p4 = newGame()
+objects.append(p1)
+objects.append(p2)
+objects.append(p3)
+objects.append(p4)
+path.append((p1.rect, '1'))
+path.append((p2.rect, '2'))
+path.append((p3.rect, '3'))
+path.append((p4.rect, '4'))
+
+# Create walls and wall array
+wall_rects = [
+    pygame.Rect([0, 0, 15, height]),
+    pygame.Rect([0, 0, width, 15]),
+    pygame.Rect([width - 15, 0, 15, height]),
+    pygame.Rect([0, height - 15, width, 15])]
+
+# Game state
+done = False
+new = False
+
+# Movement direction tuples
+moveUp = (0, -2)
+moveDown = (0, 2)
+moveLeft = (-2, 0)
+moveRight = (2, 0)
