@@ -135,3 +135,52 @@ while not done:
                 objects[3].bearing = moveLeft
             elif event.key == pygame.K_h and objects[3].bearing != moveLeft:
                 objects[3].bearing = moveRight
+
+    screen.fill(colourBackground)
+
+    # Render the walls
+    for r in wall_rects:
+        pygame.draw.rect(screen, colourWalls, r, 0)
+
+    # Loop over players
+    for obj in objects:
+        if (obj.rect, '1') in path or (obj.rect, '2') in path or (obj.rect, '3') in path or (obj.rect, '4') in path or \
+           obj.rect.collidelist(wall_rects) > -1:
+            if (time.time() - checkTime) >= 0.1:
+                checkTime = time.time()
+                if obj.colour == colourPlayer1:
+                    objects[0].alive = False
+                elif obj.colour == colourPlayer2:
+                    objects[1].alive = True
+                elif obj.colour == colourPlayer3:
+                    objects[2].alive = True
+                elif obj.colour == colourPlayer4:
+                    objects[3].alive = True
+                    
+
+                if objects[0].alive != True and objects[1].alive != True and objects[2].alive != True:
+                    new = True
+                elif objects[0].alive != True and objects[1].alive != True and objects[3].alive != True:
+                    new = True
+                elif objects[0].alive != True and objects[2].alive != True and objects[3].alive != True:
+                    new = True
+                elif objects[1].alive != True and objects[2].alive != True and objects[3].alive != True:
+                    new = True
+                
+                # Restart the round / game
+                newP1, newP2, newP3, newP4 = newGame()
+                objects = [newP1, newP2, newP3, newP4]
+                path = [(newP1.rect, '1'), (newP2.rect, '2'), (newP3.rect, '3'), (newP4.rect, '4')]
+                obj.alive = True
+                break
+        else:
+            if obj.colour == colourPlayer1 and objects[0].alive == True:
+                path.append((obj.rect, '1'))
+            elif obj.colour == colourPlayer2 and objects[1].alive == True:
+                path.append((obj.rect, '2'))
+            elif obj.colour == colourPlayer3 and objects[2].alive == True:
+                path.append((obj.rect, '3'))
+            elif obj.colour == colourPlayer4 and objects[3].alive == True:
+                path.append((obj.rect, '4'))
+        obj.draw()
+        obj.move()
