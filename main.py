@@ -91,3 +91,47 @@ moveUp = (0, -2)
 moveDown = (0, 2)
 moveLeft = (-2, 0)
 moveRight = (2, 0)
+
+# Game play loop
+while not done:
+    # Loop over all events happening in the game
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+        elif event.type == pygame.KEYDOWN:
+            # Player 1 controls
+            if event.key == pygame.K_w and objects[0].bearing != moveDown:
+                objects[0].bearing = moveUp
+            elif event.key == pygame.K_s and objects[0].bearing != moveUp:
+                objects[0].bearing = moveDown
+            elif event.key == pygame.K_a and objects[0].bearing != moveRight:
+                objects[0].bearing = moveLeft
+            elif event.key == pygame.K_d and objects[0].bearing != moveLeft:
+                objects[0].bearing = moveRight
+            # Player 2 controls
+            if event.key == pygame.K_UP and objects[1].bearing != moveDown:
+                objects[1].bearing = moveUp
+            elif event.key == pygame.K_DOWN and objects[1].bearing != moveUp:
+                objects[1].bearing = moveDown
+            elif event.key == pygame.K_LEFT and objects[1].bearing != moveRight:
+                objects[1].bearing = moveLeft
+            elif event.key == pygame.K_RIGHT and objects[1].bearing != moveLeft:
+                objects[1].bearing = moveRight
+            # Player 3 controls
+            if event.key == pygame.K_i and objects[2].bearing != moveDown:
+                objects[2].bearing = moveUp
+            elif event.key == pygame.K_k and objects[2].bearing != moveUp:
+                objects[2].bearing = moveDown
+            elif event.key == pygame.K_j and objects[2].bearing != moveRight:
+                objects[2].bearing = moveLeft
+            elif event.key == pygame.K_l and objects[2].bearing != moveLeft:
+                objects[2].bearing = moveRight
+            # Player 4 controls
+            if event.key == pygame.K_t and objects[3].bearing != moveDown:
+                objects[3].bearing = moveUp
+            elif event.key == pygame.K_g and objects[3].bearing != moveUp:
+                objects[3].bearing = moveDown
+            elif event.key == pygame.K_f and objects[3].bearing != moveRight:
+                objects[3].bearing = moveLeft
+            elif event.key == pygame.K_h and objects[3].bearing != moveLeft:
+                objects[3].bearing = moveRight
