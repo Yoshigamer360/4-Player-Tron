@@ -184,3 +184,26 @@ while not done:
                 path.append((obj.rect, '4'))
         obj.draw()
         obj.move()
+
+    # Loop over the paths and render them
+    for rect in path:
+        if new is True:
+            path = []
+            object.alive = True
+            new = False
+            break
+        if rect[1] == '1':
+            pygame.draw.rect(screen, colourPlayer1, rect[0], 0)
+        if rect[1] == '2':
+            pygame.draw.rect(screen, colourPlayer2, rect[0], 0)
+        if rect[1] == '3':
+            pygame.draw.rect(screen, colourPlayer3, rect[0], 0)
+        if rect[1] == '4':
+            pygame.draw.rect(screen, colourPlayer4, rect[0], 0)
+    
+    # Update the current frame
+    pygame.display.flip()
+    # Set the frame rate
+    clock.tick(60)
+
+pygame.quit()
